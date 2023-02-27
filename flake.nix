@@ -14,7 +14,7 @@
       devShells.x86_64-linux.default =
         pkgs.mkShell.override {stdenv = pkgs.llvmPackages_15.libcxxStdenv;}
         {
-          name = "clang shell";
+          name = "Dev env";
 
           gccwrap = ./bin;
           kakrc = ./config/kak;

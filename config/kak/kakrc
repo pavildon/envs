@@ -10,14 +10,23 @@ eval %sh{cat $kak_fzf/fzf-tmux.kak}
 hook global ModuleLoaded tmux %{
     map global user p ': fzf-tmux-file<ret>' -docstring 'Open a file with fzf'
     map global user b ': fzf-tmux-buffer<ret>' -docstring 'Open a buffer with fzf'
+
+}
+
+hook global WinCreate .*\.(ml|mli) %{
+    map global user r ':tmux-repl-vertical<ret>:repl-send-text "dune utop<c-v><ret>"<ret>' -docstring 'repl tmux'
+    map global user u ':repl-send-text "dune utop<c-v><ret>"<ret>' -docstring 'repl tmux'
+    map global user s ':repl-send-text "%val{selection};;<c-v><ret>"<ret>' -docstring 'repl tmux'
+    map global user R ':repl-send-text "#use ""%val{buffile}"";;<c-v><ret>"<ret>' -docstring 'repl tmux'
 }
 
 lsp-enable
 
 map global user k ':lsp-hover<ret>' -docstring "hover"
-map global user <del> ':w<ret>' -docstring "format code & write"
+map global user <backspace> ':lsp-formatting<ret>:write<ret>' -docstring "format code & write"
 map global user f ':lsp-formatting<ret>' -docstring "format code"
 map global user H ':lsp-auto-hover-enable<ret>' -docstring "enable hover"
+map global user e ':lsp-diagnostic-object --include-warnings<ret>' -docstring "next diagnostic"
 map global user h ':lsp-auto-hover-disable<ret>' -docstring "disable hover"
 
 map global insert <tab> '<a-;><gt>'

@@ -1,0 +1,24 @@
+set-option global tabstop 2
+set-option global indentwidth 2
+set global ui_options terminal_assistant=none
+add-highlighter global/ number-lines -relative
+set-option global scrolloff 1,3
+
+eval %sh{kak-lsp --config $kak_lsp_cfg --kakoune -s $kak_session}
+eval %sh{cat $kak_fzf/fzf-tmux.kak}
+
+hook global ModuleLoaded tmux %{
+    map global user p ': fzf-tmux-file<ret>' -docstring 'Open a file with fzf'
+    map global user b ': fzf-tmux-buffer<ret>' -docstring 'Open a buffer with fzf'
+}
+
+lsp-enable
+
+map global user k ':lsp-hover<ret>' -docstring "hover"
+map global user <del> ':w<ret>' -docstring "format code & write"
+map global user f ':lsp-formatting<ret>' -docstring "format code"
+map global user H ':lsp-auto-hover-enable<ret>' -docstring "enable hover"
+map global user h ':lsp-auto-hover-disable<ret>' -docstring "disable hover"
+
+map global insert <tab> '<a-;><gt>'
+map global insert <s-tab> '<a-;><lt>'

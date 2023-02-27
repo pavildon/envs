@@ -1,0 +1,42 @@
+{
+  "nodes": {
+    "fzf_tmux_kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663607759,
+        "narHash": "sha256-AQkTw4UGA6IzohOlp30NV0dXYv6ZRp2aUHLTrwhj3lg=",
+        "owner": "jpe90",
+        "repo": "fzf-tmux.kak",
+        "rev": "2cb9ce7557ee4536fa7608e4af6187cab46527ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jpe90",
+        "repo": "fzf-tmux.kak",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1676928847,
+        "narHash": "sha256-FIqk+DHRICsWozlOdRxOXO/g9hCqjPYpmr8wQGrpUCA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5ab8b5ae26e6a4b781bdebdfd131c054f0b96e70",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "fzf_tmux_kak": "fzf_tmux_kak",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

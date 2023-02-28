@@ -15,9 +15,9 @@ hook global ModuleLoaded tmux %{
 
 hook global WinCreate .*\.(ml|mli) %{
     map global user r ':tmux-repl-vertical<ret>:repl-send-text "dune utop<c-v><ret>"<ret>' -docstring 'repl tmux'
-    map global user u ':repl-send-text "dune utop<c-v><ret>"<ret>' -docstring 'repl tmux'
-    map global user s ':repl-send-text "%val{selection};;<c-v><ret>"<ret>' -docstring 'repl tmux'
-    map global user R ':repl-send-text "#use ""%val{buffile}"";;<c-v><ret>"<ret>' -docstring 'repl tmux'
+    map global user s ':repl-send-text "%val{selection};;<c-v><ret>"<ret>' -docstring 'send repl'
+    map global user R ':repl-send-text "#use ""%val{buffile}"";;<c-v><ret>"<ret>' -docstring 'reload file repl'
+    map global user t ':repl-send-text "#trace ""%val{selection}"";;<c-v><ret>"<ret>' -docstring 'trace function'
 }
 
 lsp-enable

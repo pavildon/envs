@@ -10,7 +10,6 @@ eval %sh{cat $kak_fzf/fzf-tmux.kak}
 hook global ModuleLoaded tmux %{
     map global user p ': fzf-tmux-file<ret>' -docstring 'Open a file with fzf'
     map global user b ': fzf-tmux-buffer<ret>' -docstring 'Open a buffer with fzf'
-
 }
 
 hook global WinCreate .*\.(ml|mli) %{
@@ -20,14 +19,26 @@ hook global WinCreate .*\.(ml|mli) %{
     map global user t ':repl-send-text "#trace ""%val{selection}"";;<c-v><ret>"<ret>' -docstring 'trace function'
 }
 
+hook global WinCreate .*\.(zig) %{
+    set-option global tabstop 4
+    set-option global indentwidth 4
+
+    map global user R ':tmux-repl-horizontal<ret>:repl-send-text "./setup_repl.sh<c-v><ret><c-l>"<ret>' -docstring 'repl tmux'
+    map global user r ':w<ret>:repl-send-text "exit<c-v><ret>./setup_repl.sh<c-v><ret>run<c-v><ret>"<ret>' -docstring 'run repl'
+    map global user b ':repl-send-text "br se -f %val{buffile} -l %val{cursor_line}<c-v><ret>run<c-v><ret>"<ret>' -docstring 'run repl'
+}
+
 lsp-enable
 
 map global user k ':lsp-hover<ret>' -docstring "hover"
 map global user <backspace> ':lsp-formatting<ret>:write<ret>' -docstring "format code & write"
+
 map global user f ':lsp-formatting<ret>' -docstring "format code"
 map global user H ':lsp-auto-hover-enable<ret>' -docstring "enable hover"
 map global user e ':lsp-diagnostic-object --include-warnings<ret>' -docstring "next diagnostic"
 map global user h ':lsp-auto-hover-disable<ret>' -docstring "disable hover"
+map global user a ':lsp-code-actions<ret>' -docstring "code actions"
 
 map global insert <tab> '<a-;><gt>'
 map global insert <s-tab> '<a-;><lt>'
+map global insert <a-n> '<esc>:lsp-snippets-select-next-placeholders<ret>'
